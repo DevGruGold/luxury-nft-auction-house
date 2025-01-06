@@ -4,6 +4,7 @@ import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Award, ChartBar, Coins, Timer, Sparkles, Globe } from "lucide-react";
+import ListItemForm from "@/components/ListItemForm";
 import {
   Card,
   CardContent,
@@ -42,6 +43,7 @@ const featuredAssets = [
 
 const Index = () => {
   const [account, setAccount] = useState<string | null>(null);
+  const [showListingForm, setShowListingForm] = useState(false);
   const { toast } = useToast();
 
   const connectWallet = async () => {
@@ -105,16 +107,31 @@ const Index = () => {
                 <span className="text-amber-400 font-mono">
                   {`${account.slice(0, 6)}...${account.slice(-4)}`}
                 </span>
-                <Button 
-                  variant="outline" 
-                  className="border-amber-500 text-amber-500 hover:bg-amber-500/10"
-                >
-                  View My Bids
-                </Button>
+                <div className="flex gap-4">
+                  <Button 
+                    variant="outline" 
+                    className="border-amber-500 text-amber-500 hover:bg-amber-500/10"
+                  >
+                    View My Bids
+                  </Button>
+                  <Button
+                    onClick={() => setShowListingForm(!showListingForm)}
+                    className="bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-black"
+                  >
+                    {showListingForm ? "Hide Listing Form" : "List an Item"}
+                  </Button>
+                </div>
               </div>
             )}
           </div>
         </div>
+
+        {/* Listing Form */}
+        {showListingForm && account && (
+          <section className="py-16 animate-fade-in">
+            <ListItemForm />
+          </section>
+        )}
 
         {/* Live Auctions */}
         <section className="py-16">
