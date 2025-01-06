@@ -20,7 +20,7 @@ const featuredAssets = [
     currentBid: "45.5 ETH",
     timeLeft: "2 days",
     category: "Virtual Real Estate",
-    image: "photo-1485827404703-89b55fcc595e",
+    image: "photo-1501854140801-50d01698950b",
     description: "Prime location in the Red Planet's most exclusive digital district"
   },
   {
@@ -28,7 +28,7 @@ const featuredAssets = [
     currentBid: "12.8 ETH",
     timeLeft: "4 hours",
     category: "Digital Art",
-    image: "photo-1526374965328-7f61d4dc18c5",
+    image: "photo-1485827404703-89b55fcc595e",
     description: "First edition series from renowned AI artist Neural Canvas"
   },
   {
@@ -36,7 +36,7 @@ const featuredAssets = [
     currentBid: "89,000 USDC",
     timeLeft: "1 day",
     category: "Technology Tokens",
-    image: "photo-1486312338219-ce68d2c6f44d",
+    image: "photo-1498050108023-c5249f4df085",
     description: "Access token for next-gen quantum computing platform"
   }
 ];
