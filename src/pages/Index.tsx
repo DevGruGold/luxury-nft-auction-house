@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { Award, ChartBar, Coins } from "lucide-react";
 
 const Index = () => {
   const [account, setAccount] = useState<string | null>(null);
@@ -30,7 +33,6 @@ const Index = () => {
   };
 
   useEffect(() => {
-    // Check if already connected
     if (typeof window.ethereum !== 'undefined') {
       window.ethereum.request({ method: 'eth_accounts' })
         .then((accounts: string[]) => {
@@ -47,14 +49,16 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 text-white">
+      <Header />
+      
       <div className="container mx-auto px-4">
         {/* Hero Section */}
-        <div className="pt-20 pb-16 text-center">
+        <div className="pt-32 pb-16 text-center">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-amber-200 to-yellow-500 text-transparent bg-clip-text">
-            Luxury NFT Marketplace
+            XMRT Auctions
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 mb-8">
-            Discover and collect extraordinary NFTs
+            Your Premier Marketplace for Blockchain Assets
           </p>
           {!account ? (
             <Button 
@@ -81,14 +85,15 @@ const Index = () => {
         {/* Stats Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-16">
           {[
-            { label: "Total Volume", value: "100K ETH" },
-            { label: "NFTs Listed", value: "10,000+" },
-            { label: "Active Users", value: "50K+" }
+            { label: "Total Volume", value: "100K ETH", icon: Coins },
+            { label: "Assets Listed", value: "25,000+", icon: Award },
+            { label: "Trading Volume", value: "$50M+", icon: ChartBar }
           ].map((stat, index) => (
             <div 
               key={index} 
-              className="bg-black/30 p-6 rounded-xl border border-amber-500/20 text-center"
+              className="bg-black/30 p-6 rounded-xl border border-amber-500/20 text-center group hover:border-amber-500/40 transition-all"
             >
+              <stat.icon className="w-8 h-8 mx-auto mb-4 text-amber-400 group-hover:scale-110 transition-transform" />
               <h3 className="text-amber-400 text-lg mb-2">{stat.label}</h3>
               <p className="text-3xl font-bold">{stat.value}</p>
             </div>
@@ -98,22 +103,29 @@ const Index = () => {
         {/* Featured Section */}
         <div className="py-16">
           <h2 className="text-3xl font-bold mb-8 text-center">
-            Featured Collections
+            Featured Assets
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((item) => (
+            {[
+              { type: "NFT", price: "2.5 ETH", category: "Digital Art" },
+              { type: "Token", price: "50,000 USDC", category: "DeFi" },
+              { type: "Real Estate", price: "100 ETH", category: "Property" }
+            ].map((item, index) => (
               <div 
-                key={item} 
-                className="bg-black/30 rounded-xl p-4 border border-amber-500/20"
+                key={index} 
+                className="bg-black/30 rounded-xl p-4 border border-amber-500/20 group hover:border-amber-500/40 transition-all"
               >
-                <div className="aspect-square bg-gradient-to-br from-amber-500/10 to-yellow-500/10 rounded-lg mb-4" />
-                <h3 className="text-xl font-bold mb-2">Collection #{item}</h3>
-                <p className="text-gray-400">Floor: 0.5 ETH</p>
+                <div className="aspect-square bg-gradient-to-br from-amber-500/10 to-yellow-500/10 rounded-lg mb-4 group-hover:from-amber-500/20 group-hover:to-yellow-500/20 transition-all" />
+                <h3 className="text-xl font-bold mb-2">{item.type}</h3>
+                <p className="text-amber-400">{item.price}</p>
+                <p className="text-gray-400 text-sm">{item.category}</p>
               </div>
             ))}
           </div>
         </div>
       </div>
+      
+      <Footer />
     </div>
   );
 };
